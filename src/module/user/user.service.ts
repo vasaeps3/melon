@@ -3,7 +3,7 @@ import { Component } from "@nestjs/common";
 
 
 @Component()
-export class UsersService {
+export class UserService {
 
     private users = [
         { id: 1, name: "John Doe" },
@@ -27,7 +27,6 @@ export class UsersService {
 
     public addUser(user) {
         this.users.push(user);
-
         return Promise.resolve();
     }
 
