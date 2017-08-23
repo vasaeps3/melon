@@ -2,6 +2,7 @@ var gulp = require("gulp");
 var ts = require("gulp-typescript");
 var rimraf = require("gulp-rimraf");
 var tslint = require("gulp-tslint");
+var watch = require("gulp-watch");
 var runSequence = require("run-sequence");
 var nodemon = require("gulp-nodemon");
 
@@ -33,6 +34,7 @@ gulp.task("start", function(done) {
 
     let server = nodemon({
         script: SCRIPT,
+        watch: ["built/**/*.*"],
         delay: 3000,
         exec: "node"
     });
@@ -46,6 +48,10 @@ gulp.task("start", function(done) {
     });
 });
 
+gulp.task("watch", function() {
+    watch(["src/**/*.ts"], () => runSequence("compile"));
+});
+
 gulp.task("default", function() {
-    return runSequence("lint", "clean", "compile", "start");
+    return runSequence("lint", "clean", "compile", ["start", "watch"]);
 });
