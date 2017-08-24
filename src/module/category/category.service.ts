@@ -1,5 +1,10 @@
+import { Error } from "tslint/lib/error";
 import { HttpException } from "@nestjs/core";
 import { Component } from "@nestjs/common";
+
+import {models, sequelize} from "../../db/db";
+import {CategoryAttributes, CategoryInstance } from "../../db/interfaces/category.interface";
+import {Transaction} from "sequelize";
 
 @Component()
 export class CategoryService {
@@ -9,8 +14,29 @@ export class CategoryService {
         { id: 30, name: "Orange"}
     ];
 
-    public getAllCategories() {
-        return Promise.resolve(this.caregories);
+    public getAllCategories(): Promise<Array<CategoryInstance>> {
+        console.log(models);
+        console.log(2222);
+
+        let promise = new Promise<Array<CategoryInstance>>((resolve: Function, reject: Function) => {
+            sequelize.transaction((t: Transaction) => {
+                return models.Category.findAll().then((products: Array<CategoryInstance>) => {
+                    console.log(1111);
+                    resolve(products);
+                });
+                // return models.Category.findAll({attributes: ['id']}).then((category: Array<CategoryInstance>) => {
+                //     // if (category){
+                //     //     console.log(category);
+                //     // } else {
+                //     //     console.log("Category not found!");
+                //     // }
+                //     resolve(category);
+                // }).catch((error: Error) => {
+                //     reject(error);
+                // });
+            });
+        });
+        return promise;
     }
 
     public getCategory(id: number) {

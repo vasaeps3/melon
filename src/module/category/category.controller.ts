@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { Controller, Get, Res, HttpStatus, Param } from "@nestjs/common";
 import { CategoryService } from "./category.service";
+import {CategoryAttributes, CategoryInstance} from "../../db/interfaces/category.interface";
 
 @Controller("categories")
 export class CategoryController {
@@ -10,7 +11,9 @@ export class CategoryController {
     @Get()
     public getAllCategories(@Res() res: Response) {
         this.categoryService.getAllCategories()
-            .then((categories) => res.status(HttpStatus.OK).json(categories));
+            .then((categories: Array<CategoryInstance>) => {
+                res.status(HttpStatus.OK).json(categories);
+            });
     }
     @Get("/:id")
     public getCategory(@Res() res: Response, @Param("id") id: number) {
