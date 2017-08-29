@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { Controller, Get, Post, Res, HttpStatus, Param, Body } from "@nestjs/common";
+
 import { UserService } from "./user.service";
 
 
@@ -7,7 +8,8 @@ import { UserService } from "./user.service";
 export class UserController {
 
     public constructor(
-        protected userService: UserService) { }
+        protected userService: UserService) {
+    }
 
     @Get()
     public getAllUsers( @Res() res: Response) {
@@ -22,7 +24,7 @@ export class UserController {
     }
 
     @Post()
-    public addUser(@Res() res, @Body("user") user) {
+    public addUser( @Res() res, @Body("user") user) {
         this.userService.addUser(user)
             .then((msg) => res.status(HttpStatus.CREATED).json(msg));
     }

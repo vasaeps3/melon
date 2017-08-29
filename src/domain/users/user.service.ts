@@ -1,6 +1,8 @@
 import { HttpException } from "@nestjs/core";
 import { Component } from "@nestjs/common";
-import {sequelize} from "../../db/db";
+
+import { sequelize } from "../../db/db";
+
 
 @Component()
 export class UserService {
@@ -27,6 +29,7 @@ export class UserService {
 
     public addUser(user) {
         this.users.push(user);
+
         return Promise.resolve();
     }
 

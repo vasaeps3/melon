@@ -2,12 +2,15 @@ interface DatabaseConfig {
     database: string;
     username: string;
     password: string;
-    host: string;
-    // port: number;
-    dialect: string;
-    logging: boolean | Function;
-    force: boolean;
-    timezone: string;
+    config: {
+        host: string;
+        port: number;
+        dialect: string;
+        logging: boolean | Function;
+        force: boolean;
+        timezone: string;
+    };
+
 }
 class DbConfig {
     private _databaseConfig: DatabaseConfig;
@@ -16,12 +19,14 @@ class DbConfig {
             username: "root",
             password: "",
             database: "melondev",
-            host: "localhost",
-            // port: 3306,
-            dialect: "mysql",
-            logging: true,
-            force: true,
-            timezone: "+00:00"
+            config: {
+                host: "localhost",
+                port: 3306,
+                dialect: "mysql",
+                logging: true,
+                force: true,
+                timezone: "+00:00"
+            }
         };
     }
     public getDatabaseConfig(): DatabaseConfig {
