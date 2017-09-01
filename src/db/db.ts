@@ -27,7 +27,7 @@ class Database {
         }).forEach((modelDir: string) => {
             modelDir = path.join(dir, modelDir);
             fs.readdirSync(modelDir).filter((file: string) => {
-                return !!~file.indexOf("model.js");
+                return file.endsWith("model.js");
             }).forEach((file: string) => {
                 file = path.join(modelDir, file);
                 let model = this._sequelize.import(file);
