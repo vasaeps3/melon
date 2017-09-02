@@ -3,8 +3,9 @@ var ts = require("gulp-typescript");
 var rimraf = require("gulp-rimraf");
 var tslint = require("gulp-tslint");
 var watch = require("gulp-watch");
-var runSequence = require("run-sequence");
 var nodemon = require("gulp-nodemon");
+var sourcemaps = require("gulp-sourcemaps");
+var runSequence = require("run-sequence");
 
 
 // Config of gulp plugins
@@ -12,9 +13,22 @@ runSequence.options.showErrorStackTrace = false;
 
 gulp.task("compile", function () {
     let project = ts.createProject("./tsconfig.json", { rootDir: "src" });
+    let options = { 
+        includeContent: false,
+        sourceRoot: file => file
+            .history[0]
+            .replace((file).base, "")
+            .split("\/")
+            .map(() => "..")
+            .slice(2)
+            .join("/")
+    };
 
     return project.src()
+        .pipe(sourcemaps.init())
         .pipe(project())
+        .js
+        .pipe(sourcemaps.write(options))
         .pipe(gulp.dest("built"));
 });
 
