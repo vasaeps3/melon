@@ -13,8 +13,8 @@ import { CategoryController } from "./category.controller";
 export class CategoryModule {
     public configure(consumer: MiddlewaresConsumer) {
         consumer
-            .apply(AuthMiddleware).forRoutes(CategoryController)
             .apply(LoggingMiddleware).forRoutes(CategoryController)
+            .apply(AuthMiddleware).forRoutes(CategoryController)
             ;
     }
 }
