@@ -7,6 +7,8 @@
         {
             "type": "node",
             "request": "launch",
+            "protocol": "inspector",
+            "port": 9229,
             "name": "Gulp start",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
             "args": [
@@ -15,9 +17,7 @@
             "outFiles": [
                 "${workspaceRoot}/built/**/*.js"
             ],
-            "sourceMaps": true,
-            "stopOnEntry": true,
-            "trace": "all"
+            "sourceMaps": true
         }
     ]
 }

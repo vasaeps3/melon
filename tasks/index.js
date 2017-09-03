@@ -51,7 +51,7 @@ gulp.task("start", function (done) {
         script: SCRIPT,
         watch: ["built/**/*.*"],
         delay: 3000,
-        exec: "start node --inspect"
+        exec: "node --inspect"
     });
 
     server.on("restart", function () {
