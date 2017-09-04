@@ -17,7 +17,7 @@ class DbConfig {
     constructor() {
         this._databaseConfig = {
             username: "root",
-            password: "",
+            password: "root", // Сделай себе такой же плз
             database: "melondev",
             config: {
                 host: "localhost",

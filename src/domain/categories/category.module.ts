@@ -1,9 +1,10 @@
 import { MiddlewaresConsumer, Module } from "@nestjs/common";
 
-import { AuthMiddleware } from "../../middleware/auth.middleware";
 import { CategoryService } from "./category.service";
 import { LoggingMiddleware } from "../../middleware/logging.middleware";
 import { CategoryController } from "./category.controller";
+import { AuthorizeMiddleware } from "../../middleware/authorize.middleware";
+import { AuthenticateMiddleware } from "../../middleware/authenticate.middleware";
 
 
 @Module({
@@ -13,8 +14,9 @@ import { CategoryController } from "./category.controller";
 export class CategoryModule {
     public configure(consumer: MiddlewaresConsumer) {
         consumer
-            .apply(AuthMiddleware).forRoutes(CategoryController)
+            .apply(AuthorizeMiddleware).forRoutes(CategoryController)
             .apply(LoggingMiddleware).forRoutes(CategoryController)
+            .apply(AuthenticateMiddleware).with(["admin"]).forRoutes(CategoryController)
             ;
     }
 }

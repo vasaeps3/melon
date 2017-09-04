@@ -5,8 +5,8 @@ import * as bodyParser from "body-parser";
 import { NestFactory } from "@nestjs/core";
 import { Request, Response } from "express";
 
-import { ApplicationModule } from "./domain/app.module";
 import { sequelize } from "./db/db";
+import { ApplicationModule } from "./domain/app.module";
 
 
 const PORT = 3000;
