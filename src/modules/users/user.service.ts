@@ -1,8 +1,6 @@
 import { HttpException } from "@nestjs/core";
 import { Component } from "@nestjs/common";
 
-import { sequelize } from "../../db/db";
-
 
 @Component()
 export class UserService {

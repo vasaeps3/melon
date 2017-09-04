@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 
-import { UserModule } from "./users/user.module";
-import { CategoryModule } from "./categories/category.module";
+import { UserModule } from "../users/user.module";
+import { CategoryModule } from "../categories/category.module";
 
 
 @Module({
