@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { Body, Controller, Get, HttpStatus, Param, Post, Req, Res } from "@nestjs/common";
 
-import { User } from './user.entity';
+import { User } from "./user.entity";
 import { UserService } from "./user.service";
 
 

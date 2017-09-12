@@ -12,5 +12,9 @@ const PORT = 3000;
 const instance = express();
 instance.use(bodyParser.json());
 
-const app = NestFactory.create(ApplicationModule, instance);
-app.listen(PORT, () => console.log(`Application is listening on port ${PORT}`));
+async function bootstrap() {
+    const app = await NestFactory.create(ApplicationModule, instance);
+    await app.listen(PORT, () => console.log(`Application is listening on port ${PORT}`));
+}
+
+bootstrap();
