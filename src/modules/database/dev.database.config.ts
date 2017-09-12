@@ -1,6 +1,7 @@
 import { Component } from "@nestjs/common";
 import { ConnectionOptions } from "typeorm";
 
+import { Role } from "../roles/role.entity";
 import { User } from "../users/user.entity";
 import { Category } from "../categories/category.entity";
 import { DatabaseConfig } from "./database.config";
@@ -21,7 +22,8 @@ export class DevDatabaseConfig extends DatabaseConfig {
             entities: [
                 // any entity file under src/modules
                 Category,
-                User
+                User,
+                Role
             ],
             autoSchemaSync: true,
             logger: "advanced-console",

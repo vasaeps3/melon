@@ -1,5 +1,6 @@
-import { Entity, Column } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
 
+import { Role } from "../roles/role.entity";
 import { EntityBase } from "../../common/base.entity";
 
 
@@ -13,5 +14,9 @@ export class User extends EntityBase {
 
     @Column()
     public password: string;
+
+    @ManyToMany(type => Role)
+    @JoinTable({ name: "user_role" })
+    public roles: Role[];
 
 }

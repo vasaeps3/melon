@@ -34,4 +34,10 @@ export class UserController {
             });
     }
 
+    @Get("/:id/roles")
+    public async getRolesByUserId( @Param("id") id: string, @Res() res: Response) {
+        let userRoles = await this.userService.getRolesByUserId(+id);
+        res.status(HttpStatus.OK).json(userRoles);
+    }
+
 }
