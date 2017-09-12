@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import * as crypto from "crypto";
 import { Component } from "@nestjs/common";
 import { Repository } from "typeorm";
@@ -25,6 +26,12 @@ export class UserService extends ServiceBase<User> implements Service<User> {
         }
 
         return super.add(user);
+    }
+
+    public async getAll(): Promise<User[]> {
+        let users: User[] = await super.getAll();
+
+        return _.map(users, user => _.omit(user, ["password"]));
     }
 
     private encryptPassword(password): string {
