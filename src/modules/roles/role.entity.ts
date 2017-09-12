@@ -4,14 +4,16 @@ import { EntityBase } from "../../common/base.entity";
 
 
 @Entity()
-export class User extends EntityBase {
+export class Role extends EntityBase {
+
+    @Column({
+        "unique": true
+    })
+    public code: string;
 
     @Column({
         "unique": true
     })
     public name: string;
-
-    @Column()
-    public password: string;
 
 }

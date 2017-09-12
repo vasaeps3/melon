@@ -1,19 +1,21 @@
+import * as crypto from "crypto";
 import { Component } from "@nestjs/common";
 import { Repository } from "typeorm";
-import * as crypto from "crypto";
 
 import { User } from "./user.entity";
-import { Service } from "../database/service.interface";
+import { Service } from "../../common/service.interface";
+import { ServiceBase } from "../../common/base.service";
 import { DatabaseService } from "../database/database.service";
 
 
 @Component()
-export class UserService implements Service<User> {
+export class UserService extends ServiceBase<User> implements Service<User> {
 
     constructor(private databaseService: DatabaseService) {
+        super();
     }
 
-    private get repository(): Promise<Repository<User>> {
+    protected get repository(): Promise<Repository<User>> {
         return this.databaseService.getRepository(User);
     }
 
@@ -21,27 +23,8 @@ export class UserService implements Service<User> {
         if (user.password) {
             user.password = this.encryptPassword(user.password);
         }
-        return (await this.repository).persist(user);
-    }
 
-    public async addAll(users: User[]): Promise<User[]> {
-        return (await this.repository).persist(users);
-    }
-
-    public async getAll(): Promise<User[]> {
-        return (await this.repository).find();
-    }
-
-    public async getById(id: number): Promise<User> {
-        return (await this.repository).findOneById(id);
-    }
-
-    public async update(user: User): Promise<User> {
-        return (await this.repository).persist(user);
-    }
-
-    public async remove(user: User): Promise<User> {
-        return (await this.repository).remove(user);
+        return super.add(user);
     }
 
     private encryptPassword(password): string {

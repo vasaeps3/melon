@@ -12,11 +12,11 @@ export class DevDatabaseConfig extends DatabaseConfig {
         console.log("-----222----");
         console.log(__dirname + "/../.entity.ts");
         return {
-            type: "mysql",
+            type: "postgres",
             host: "localhost",
-            port: 3306,
-            username: "root",
-            password: "",
+            port: 5432,
+            username: "postgres",
+            password: "root",
             database: "melondev",
             entities: [
                 // any entity file under src/modules

@@ -1,11 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
+import { EntityBase } from "../../common/base.entity";
+
 
 @Entity()
-export class Category {
-
-    @PrimaryGeneratedColumn()
-    public id: number;
+export class Category extends EntityBase {
 
     @Column()
     public name: string;

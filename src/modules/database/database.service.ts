@@ -1,12 +1,12 @@
-import { Component } from "@nestjs/common";
 import { HttpException } from "@nestjs/core";
+import { Component, OnModuleInit } from "@nestjs/common";
 import { createConnection, Connection, EntityManager, Repository, ObjectType, Entity } from "typeorm";
 
 import { DatabaseConfig } from "./database.config";
 
 
 @Component()
-export class DatabaseService {
+export class DatabaseService implements OnModuleInit {
 
     /**
      * A Connection reference which is reused by all consumers of the database service
@@ -19,11 +19,18 @@ export class DatabaseService {
      */
     constructor(private readonly databaseConfig: DatabaseConfig) { }
 
+    public async onModuleInit() {
+        console.log("alarm");
+        // this._connection = await createConnection(this.databaseConfig.getConfiguration());
+    }
+
     /**
      * An async getter for the Connection which creates the connection if needed.
      * @returns {Promise<Connection>}
      */
     private get connection(): Promise<Connection> {
+        // return this._connection;
+
         // return the connection if it's been created already
         if (this._connection) {
             return Promise.resolve(this._connection);
