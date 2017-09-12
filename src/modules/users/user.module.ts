@@ -13,7 +13,8 @@ import { AuthenticateMiddleware } from "../../middleware/authenticate.middleware
 @Module({
     modules: [DatabaseModule],
     controllers: [UserController],
-    components: [UserService,
+    components: [
+        UserService,
         { provide: DatabaseConfig, useClass: DevDatabaseConfig }
     ],
 })
