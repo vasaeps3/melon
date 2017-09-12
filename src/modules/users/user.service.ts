@@ -1,5 +1,6 @@
 import { Component } from "@nestjs/common";
 import { Repository } from "typeorm";
+import * as crypto from "crypto";
 
 import { User } from "./user.entity";
 import { Service } from "../database/service.interface";
@@ -17,9 +18,9 @@ export class UserService implements Service<User> {
     }
 
     public async add(user: User): Promise<User> {
-        console.log("---");
-        console.log(user);
-        console.log("---");
+        if (user.password) {
+            user.password = this.encryptPassword(user.password);
+        }
         return (await this.repository).persist(user);
     }
 
@@ -43,5 +44,8 @@ export class UserService implements Service<User> {
         return (await this.repository).remove(user);
     }
 
+    private encryptPassword(password): string {
+        return crypto.createHash("sha1").update(password).digest("hex");
+    }
 
 }

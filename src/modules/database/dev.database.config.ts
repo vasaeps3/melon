@@ -16,7 +16,7 @@ export class DevDatabaseConfig extends DatabaseConfig {
             host: "localhost",
             port: 3306,
             username: "root",
-            password: "root",
+            password: "",
             database: "melondev",
             entities: [
                 // any entity file under src/modules
@@ -24,6 +24,8 @@ export class DevDatabaseConfig extends DatabaseConfig {
                 User
             ],
             autoSchemaSync: true,
+            logger: "advanced-console",
+            logging: "all",
         };
     }
 }

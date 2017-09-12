@@ -28,9 +28,10 @@ export class UserController {
 
     @Post()
     public create( @Res() res: Response, @Body() user: User) {
-        console.log(user);
         this.userService.add(user)
-            .then((createdUsers) => res.status(HttpStatus.OK).json(createdUsers));
+            .then((createdUsers) => {
+                return res.status(HttpStatus.OK).json(createdUsers);
+            });
     }
 
 }
