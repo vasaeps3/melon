@@ -16,7 +16,6 @@ export class CategoryService implements Service<Category> {
         return this.databaseService.getRepository(Category);
     }
 
-    // C
     public async add(category: Category): Promise<Category> {
         return (await this.repository).persist(category);
     }
@@ -25,7 +24,6 @@ export class CategoryService implements Service<Category> {
         return (await this.repository).persist(categories);
     }
 
-    // R
     public async getAll(): Promise<Category[]> {
         return (await this.repository).find();
     }
@@ -34,12 +32,10 @@ export class CategoryService implements Service<Category> {
         return (await this.repository).findOneById(id);
     }
 
-    // U
     public async update(category: Category): Promise<Category> {
         return (await this.repository).persist(category);
     }
 
-    // D
     public async remove(category: Category): Promise<Category> {
         return (await this.repository).remove(category);
     }

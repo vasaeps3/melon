@@ -1,6 +1,7 @@
 import { Component } from "@nestjs/common";
 import { ConnectionOptions } from "typeorm";
 
+import { User } from "../users/user.entity";
 import { Category } from "../categories/category.entity";
 import { DatabaseConfig } from "./database.config";
 
@@ -15,11 +16,12 @@ export class DevDatabaseConfig extends DatabaseConfig {
             host: "localhost",
             port: 3306,
             username: "root",
-            password: "",
+            password: "root",
             database: "melondev",
             entities: [
                 // any entity file under src/modules
-                Category
+                Category,
+                User
             ],
             autoSchemaSync: true,
         };

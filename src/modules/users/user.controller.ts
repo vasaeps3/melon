@@ -1,6 +1,7 @@
-import { Response } from "express";
-import { Controller, Get, Post, Res, HttpStatus, Param, Body } from "@nestjs/common";
+import { Response, Request } from "express";
+import { Body, Controller, Get, HttpStatus, Param, Post, Req, Res } from "@nestjs/common";
 
+import { User } from './user.entity';
 import { UserService } from "./user.service";
 
 
@@ -12,21 +13,24 @@ export class UserController {
     }
 
     @Get()
-    public getAllUsers( @Res() res: Response) {
-        this.userService.getAllUsers()
-            .then((users) => res.status(HttpStatus.OK).json(users));
+    public getAll( @Res() res: Response) {
+        this.userService.getAll()
+            .then((users: User[]) => {
+                res.status(HttpStatus.OK).json(users);
+            });
     }
 
     @Get("/:id")
-    public getUser( @Res() res: Response, @Param("id") id: number) {
-        this.userService.getUser(+id)
+    public getById( @Res() res: Response, @Param("id") id: string) {
+        this.userService.getById(+id)
             .then((user) => res.status(HttpStatus.OK).json(user));
     }
 
     @Post()
-    public addUser( @Res() res, @Body("user") user) {
-        this.userService.addUser(user)
-            .then((msg) => res.status(HttpStatus.CREATED).json(msg));
+    public create( @Res() res: Response, @Body() user: User) {
+        console.log(user);
+        this.userService.add(user)
+            .then((createdUsers) => res.status(HttpStatus.OK).json(createdUsers));
     }
 
 }
