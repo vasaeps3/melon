@@ -1,6 +1,6 @@
-import { AuthService } from "../auth/auth.service";
 import { Module, MiddlewaresConsumer } from "@nestjs/common";
 
+import { AuthModule } from "../auth/auth.module";
 import { UserService } from "./user.service";
 import { UserController } from "./user.controller";
 import { DatabaseConfig } from "../database/database.config";
@@ -12,10 +12,9 @@ import { AuthenticateMiddleware } from "../../middleware/authenticate.middleware
 
 
 @Module({
-    modules: [DatabaseModule],
+    modules: [DatabaseModule, AuthModule],
     controllers: [UserController],
     components: [
-        AuthService,
         UserService,
         { provide: DatabaseConfig, useClass: DevDatabaseConfig }
     ],
