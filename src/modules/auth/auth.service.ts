@@ -13,12 +13,8 @@ export class AuthService {
     constructor(private databaseService: DatabaseService) {
     }
 
-    protected get repository(): Promise<Repository<User>> {
-        return this.databaseService.getRepository(User);
-    }
-
     public async getRolesByUserId(userId: number): Promise<Role[]> {
-        let user: User = await (await this.repository)
+        let user: User = await (await this.databaseService.getRepository(User))
             .createQueryBuilder("user")
             .where("user.id=:userId")
             .leftJoinAndSelect("user.roles", "roles")
