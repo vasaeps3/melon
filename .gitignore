@@ -1,5 +1,5 @@
-/node_modules
-/built
-/.idea
-/.vscode
-package-lock.json
+**/node_modules
+**/built
+**/.idea
+**/.vscode
+/backend/package-lock.json
