@@ -21,7 +21,7 @@ export class AuthenticateMiddleware implements NestMiddleware {
             let userId = token.user; // test token = { user: 1 }
 
             let userPermissions: Permission[] = await this.authService.getUserPermissions(userId);
-
+            console.log(Permission);
             console.log("-------AuthenticateMiddleware LOG START---------");
             console.log("requiredPermissions:", requiredPermissions);
             console.log("userPermissions:", userPermissions);
