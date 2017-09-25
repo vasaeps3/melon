@@ -1,0 +1,36 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "project": {
+        "name": "ng-cli-test"
+    },
+    "apps": [{
+        "root": "src",
+        "outDir": "dist",
+        "assets": [
+            "assets",
+            "favicon.ico"
+        ],
+        "index": "index.html",
+        "main": "ng-main.ts",
+        "polyfills": "ng-polyfills.ts",
+        "tsconfig": "tsconfig.app.json",
+        "prefix": "app",
+        "styles": [
+            "../node_modules/font-awesome/css/font-awesome.css",
+            "styles/app.scss"
+        ],
+        "scripts": [],
+        "environmentSource": "environments/environment.ts",
+        "environments": {
+            "dev": "environments/environment.ts",
+            "prod": "environments/environment.prod.ts"
+        }
+    }],
+    "lint": [{
+        "project": "src/tsconfig.app.json"
+    }],
+    "defaults": {
+        "styleExt": "scss",
+        "component": {}
+    }
+}
